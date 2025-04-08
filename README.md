@@ -1,13 +1,16 @@
-# *Skin-Cancer-Classification*
-<img src="skin cancer Image" alt="Image description" width="800" height="500">>
+# *Parkinsons Disease*
+![image](https://github.com/user-attachments/assets/8577d6d3-3f14-4456-9ac2-70ee268daa00)
+
 # 📑Project Title
-### DeepSkinCancer: Detection and Classification Using Advanced Deep Learning Algorithms
+### Design of An Efficient Forecast Model For Too Early Parkinson’s Disease Detection    
 # 📌Description
-DeepSkinCancer: Detection and Classification Using Advanced Deep Learning Algorithms is a deep learning-based project aimed at early detection and classification of skin cancer using advanced Convolutional Neural Networks (CNNs). By leveraging pre-trained models like VGG16, ResNet50, DenseNet169, DenseNet201, and Xception, this project improves diagnostic accuracy in identifying nine different types of skin cancer from medical images.
+Parkinson’s disease (PD) is a progressive neurological disorder that presents symptoms similar to various other conditions, making early and accurate diagnosis a challenging task. Common symptoms include tremors, muscle stiffness, slowed movements, and balance issues. Recognizing the critical need for early detection to ensure better patient outcomes, this study explores the dynamic patterns of handwritten documents as a diagnostic marker for PD.
 
-The project utilizes data augmentation, preprocessing techniques, and fine-tuning of CNN architectures to achieve high classification accuracy. With a dataset of 2080 images from ISIC, the model is trained using SGD optimizer and categorical crossentropy loss function, evaluating performance based on accuracy, precision, recall, and F1-score.
+Traditional machine learning approaches relying on manually crafted features have shown limited accuracy and performance. To address these challenges, this work introduces an advanced deep learning model optimized for the early diagnosis of Parkinson’s disease. The proposed model leverages a genetic algorithm combined with the K-Nearest Neighbor (KNN) technique for feature optimization, resulting in significantly improved predictive accuracy.
 
-The final trained model, which achieved the best results with Xception, is intended for deployment on AWS Cloud using Flask or FastAPI, making it accessible for real-world applications in dermatology.
+The methodology achieves detection accuracy greater than 95%, precision exceeding 98%, an area under the curve (AUC) above 0.90, and a remarkably low loss of 0.12. Additionally, an ensemble strategy integrating Tuned KNN and Random Forest classifiers achieves an unprecedented 100% accuracy, highlighting the strength of the combined approach.
+
+This study presents a strong and innovative diagnostic tool that not only outperforms several state-of-the-art machine learning and deep learning models but also makes a substantial contribution to the field of early Parkinson’s disease detection.
 # 📌Table of Contents
 - [Project Overview](#project-0verview)
 - [Dataset](#dataset)
@@ -19,19 +22,18 @@ The final trained model, which achieved the best results with Xception, is inten
 - [Training Details](#training-details)
 - [Performance Metrics](#Performance-Metrics)
 ## 📌Project Overview
-This project aims to classify different types of skin cancer using deep learning models. By leveraging advanced CNN architectures, we improve diagnostic accuracy and provide an AI-driven solution for early skin cancer detection.
+This project proposes a deep learning model for the early detection of Parkinson’s disease using optimized features through a genetic algorithm and KNN.
+It achieves over 95% accuracy, 98% precision, and very low loss, outperforming traditional methods.
+An ensemble of Tuned KNN and Random Forest further boosts the model to 100% accuracy.
 ## 📂Dataset
-Dataset Source: https://www.kaggle.com/datasets/nodoubttome/skin-cancer9-classesisic
+Dataset Source: https://www.kaggle.com/datasets/kmader/parkinsons-drawings
 
-Total Images: 2080
-
-Image Size: 224x224 pixels
 ## 🛠️Dependencies
 Before running the project, ensure the following Python libraries are installed:
 
-- `tensorflow`: For deep learning model development.
+- `tensorflow`: For  image process
 
-- `keras`: High-level API for building deep learning models.
+- `keras`:  For neural networks Model
 
 - `matplotlib`: For data visualization.
 
@@ -40,6 +42,11 @@ Before running the project, ensure the following Python libraries are installed:
 - `pandas`: For data manipulation and analysis.
 
 - `os`: For handling file operations.
+- Torchvision: For image processing tasks.
+- Opencv: For computer vision image.
+- Flask: For lightweight web framework in Python.
+- SQLite: For simple database functionality.
+
 
 To install these dependencies, run the following command:
 
@@ -48,19 +55,29 @@ pip install tensorflow keras matplotlib numpy pandas os
 ```
 ## 📌Required Imports & Libraries
 ```sh
-import tensorflow as tf
-from tensorflow.keras.applications import VGG16, ResNet50, DenseNet169, DenseNet201, Xception
+from tensorflow.keras.layers import Dense, Flatten, Input, Lambda
+from tensorflow.keras.models import Model
+from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications.resnet50 import preprocess_input
+from tensorflow.keras.applications.vgg16 import preprocess_input
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.vgg19 import preprocess_input
+from tensorflow.keras.applications.inception_v3 import InceptionV3
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
+from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img
-from tensorflow.keras.models import Model, Sequential
-from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D
+from keras.models import Sequential
+from glob import glob
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-import os
+import tensorflow as tf
 ```
 ## 📁Project Structure
 ```sh
-DeepSkinCancer/
+Parkinsons dieasae/
 │── dataset/               # Contains the dataset images
 │── models/                # Pre-trained models and trained weights
 │── src/
@@ -68,7 +85,7 @@ DeepSkinCancer/
 │   │── import_dataset.py    # Loading and handling dataset
 │   │── preprocess.py        # Data preprocessing and augmentation
 │   │── image_processing.py  # Image transformations
-│   │── train.py             # Model training (ResNet50, DenseNet169, VGG16, Xception, DenseNet201)
+│   │── train.py             # Model training (ResNet50, DenseNet169, VGG19, Xception, DenseNet201)
 │   │── user_signup.py       # User sign-up implementation
 │   │── user_signin.py       # User sign-in implementation
 │   │── user_input.py        # Handling user inputs
