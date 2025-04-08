@@ -85,7 +85,7 @@ Parkinsons dieasae/
 │   │── import_dataset.py    # Loading and handling dataset
 │   │── preprocess.py        # Data preprocessing and augmentation
 │   │── image_processing.py  # Image transformations
-│   │── train.py             # Model training (ResNet50, DenseNet169, VGG19, Xception, DenseNet201)
+│   │── train.py             # Model training (ResNet50, VGG19, Xception)
 │   │── user_signup.py       # User sign-up implementation
 │   │── user_signin.py       # User sign-in implementation
 │   │── user_input.py        # Handling user inputs
@@ -97,16 +97,17 @@ Parkinsons dieasae/
 ## 🔄Data Preprocessing
 ### Training Data Augmentation:
 ```sh
-train_datagen = ImageDataGenerator(
-    rescale=1./255, 
-    shear_range=0.2, 
-    zoom_range=0.2, 
-    horizontal_flip=False
-)
+train_set = train_datagen.flow_from_directory(train_path,
+                                              target_size=(128,128),
+                                              batch_size=2,
+                                              class_mode = 'categorical')
 ```
 ### Test Data Preprocessing:
 ```sh
-test_datagen = ImageDataGenerator(rescale=1./255)
+test_set = test_datagen.flow_from_directory(test_path,
+                                            target_size=(128,128),
+                                            batch_size=2,
+                                            class_mode='categorical')
 ```
 ## 🏗️Model Architectures Used
 We experimented with multiple deep learning models:
