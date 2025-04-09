@@ -42,10 +42,10 @@ Before running the project, ensure the following Python libraries are installed:
 - `pandas`: For data manipulation and analysis.
 
 - `os`: For handling file operations.
-- Torchvision: For image processing tasks.
-- Opencv: For computer vision image.
-- Flask: For lightweight web framework in Python.
-- SQLite: For simple database functionality.
+- 'Torchvision': For image processing tasks.
+- 'Opencv': For computer vision image.
+- 'Flask': For lightweight web framework in Python.
+- 'SQLite': For simple database functionality.
 
 
 To install these dependencies, run the following command:
@@ -97,16 +97,18 @@ Parkinsons dieasae/
 ## 🔄Data Preprocessing
 ### Training Data Augmentation:
 ```sh
-train_datagen = ImageDataGenerator(
-    rescale=1./255, 
-    shear_range=0.2, 
-    zoom_range=0.2, 
-    horizontal_flip=False
-)
+train_set = train_datagen.flow_from_directory(train_path,
+                                              target_size=(128,128),
+                                              batch_size=2,
+                                              class_mode = 'categorical')
 ```
 ### Test Data Preprocessing:
 ```sh
-test_datagen = ImageDataGenerator(rescale=1./255)
+
+test_set = test_datagen.flow_from_directory(test_path,
+                                            target_size=(128,128),
+                                            batch_size=2,
+                                            class_mode='categorical')
 ```
 ## 🏗️Model Architectures Used
 We experimented with multiple deep learning models:
@@ -115,7 +117,7 @@ We experimented with multiple deep learning models:
 
 - `ResNet50`: A 50-layer deep residual network that introduces skip connections (residual learning) to avoid the vanishing gradient problem. It allows training of very deep networks with improved performance.
 
-- `DenseNet169`: A densely connected CNN with 169 layers, where each layer receives input from all previous layers. This promotes feature reuse and reduces the number of parameters compared to traditional deep networks.
+- `inception_v3`: A densely connected CNN with 169 layers, where each layer receives input from all previous layers. This promotes feature reuse and reduces the number of parameters compared to traditional deep networks.
 
 - `DenseNet201`: A deeper variant of DenseNet with 201 layers, further improving accuracy and efficiency through better feature propagation and gradient flow.
 
